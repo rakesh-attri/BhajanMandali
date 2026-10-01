@@ -1,0 +1,504 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bhajan Mandali | Ethereal Engineering</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Outfit:wght@300;400;500;600&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        // Instrument Serif gives that sophisticated "Claude Opus" academic/elegant feel
+                        serif: ['"Instrument Serif"', 'serif'],
+                        // Outfit provides the clean, modern "Astra/Google" tech feel
+                        sans: ['Outfit', 'sans-serif'],
+                        // Space Mono for technical details
+                        mono: ['"Space Mono"', 'monospace'],
+                    },
+                    colors: {
+                        surface: {
+                            900: '#030305', // Extremely dark blue/black
+                            800: '#0a0a12',
+                            card: 'rgba(255, 255, 255, 0.03)',
+                        },
+                        ethereal: {
+                            saffron: '#ff9933', // Spiritual Krishna vibe
+                            violet: '#8b5cf6',  // AI/Tech intelligence
+                            cyan: '#06b6d4',    // Digital flow
+                            rose: '#f43f5e',
+                        }
+                    },
+                    animation: {
+                        'blob': 'blob 15s infinite',
+                        'blob-reverse': 'blob-reverse 20s infinite',
+                        'float': 'float 6s ease-in-out infinite',
+                        'pulse-slow': 'pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+                    },
+                    keyframes: {
+                        blob: {
+                            '0%': { transform: 'translate(0px, 0px) scale(1)' },
+                            '33%': { transform: 'translate(30px, -50px) scale(1.1)' },
+                            '66%': { transform: 'translate(-20px, 20px) scale(0.9)' },
+                            '100%': { transform: 'translate(0px, 0px) scale(1)' },
+                        },
+                        'blob-reverse': {
+                            '0%': { transform: 'translate(0px, 0px) scale(1)' },
+                            '33%': { transform: 'translate(-30px, 50px) scale(1.2)' },
+                            '66%': { transform: 'translate(20px, -20px) scale(0.8)' },
+                            '100%': { transform: 'translate(0px, 0px) scale(1)' },
+                        },
+                        float: {
+                            '0%, 100%': { transform: 'translateY(0)' },
+                            '50%': { transform: 'translateY(-10px)' },
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    
+    <style>
+        body {
+            background-color: #030305;
+            color: #f1f5f9;
+            overflow-x: hidden;
+        }
+
+        /* Fluid Mesh Background - Astra Vibe */
+        .mesh-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            z-index: -1;
+            overflow: hidden;
+            background: #030305;
+        }
+
+        .mesh-blob {
+            position: absolute;
+            filter: blur(120px);
+            opacity: 0.4;
+            border-radius: 50%;
+            animation: blob 15s infinite alternate;
+        }
+
+        .blob-1 { top: -10%; left: -10%; width: 50vw; height: 50vw; background: rgba(139, 92, 246, 0.6); } /* Violet */
+        .blob-2 { top: 40%; right: -20%; width: 60vw; height: 60vw; background: rgba(255, 153, 51, 0.4); animation-delay: 2s; } /* Saffron */
+        .blob-3 { bottom: -20%; left: 20%; width: 50vw; height: 50vw; background: rgba(6, 182, 212, 0.5); animation-duration: 20s; } /* Cyan */
+
+        /* Sophisticated Glass Cards - Opus Vibe */
+        .glass-panel {
+            background: rgba(255, 255, 255, 0.02);
+            backdrop-filter: blur(24px);
+            -webkit-backdrop-filter: blur(24px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 1.5rem;
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+            transition: all 0.4s ease;
+        }
+
+        .glass-panel:hover {
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            box-shadow: 0 8px 40px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Elegant button styling */
+        .btn-ethereal {
+            position: relative;
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 9999px;
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+        
+        .btn-ethereal::before {
+            content: '';
+            position: absolute;
+            top: 0; left: -100%;
+            width: 100%; height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.1), transparent);
+            transition: all 0.5s ease;
+        }
+        
+        .btn-ethereal:hover::before {
+            left: 100%;
+        }
+
+        .btn-ethereal:hover {
+            background: rgba(255, 255, 255, 0.1);
+            border-color: rgba(255, 255, 255, 0.3);
+            transform: translateY(-2px);
+        }
+
+        /* Text Gradients */
+        .text-gradient-warm {
+            background: linear-gradient(135deg, #ffedd5 0%, #ff9933 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        
+        .text-gradient-cool {
+            background: linear-gradient(135deg, #e2e8f0 0%, #8b5cf6 50%, #06b6d4 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: #030305; }
+        ::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.2); border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: rgba(255,255,255,0.4); }
+    </style>
+</head>
+<body class="font-sans antialiased text-gray-300 selection:bg-ethereal-violet/30 selection:text-white">
+
+    <div class="mesh-bg">
+        <div class="mesh-blob blob-1"></div>
+        <div class="mesh-blob blob-2"></div>
+        <div class="mesh-blob blob-3"></div>
+        <!-- Noise overlay for texture (prevents color banding) -->
+        <div class="absolute inset-0 opacity-[0.03] mix-blend-overlay" style="background-image: url('data:image/svg+xml,%3Csvg viewBox=%220 0 200 200%22 xmlns=%22http://www.w3.org/2000/svg%22%3E%3Cfilter id=%22noiseFilter%22%3E%3CfeTurbulence type=%22fractalNoise%22 baseFrequency=%220.65%22 numOctaves=%223%22 stitchTiles=%22stitch%22/%3E%3C/filter%3E%3Crect width=%22100%25%22 height=%22100%25%22 filter=%22url(%23noiseFilter)%22/%3E%3C/svg%3E');"></div>
+    </div>
+
+    <nav class="fixed w-full z-50 top-6 px-4 transition-all duration-300 flex justify-center">
+        <div class="glass-panel px-6 py-3 flex justify-between items-center w-full max-w-4xl rounded-full">
+            
+            <!-- Logo area -->
+            <div class="flex items-center space-x-3 group cursor-pointer">
+                <i class="fa-solid fa-fan animate-spin text-ethereal-saffron/80 text-lg" style="animation-duration: 8s;"></i>
+                <span class="font-serif text-xl tracking-wide text-white">Bhajan Mandali</span>
+            </div>
+
+            <!-- Desktop Links -->
+            <div class="hidden md:flex items-center space-x-8 font-sans text-sm font-light">
+                <a href="#philosophy" class="text-gray-400 hover:text-white transition-colors">Philosophy</a>
+                <a href="#capabilities" class="text-gray-400 hover:text-white transition-colors">Capabilities</a>
+                <a href="#resonance" class="text-gray-400 hover:text-white transition-colors">Resonance</a>
+            </div>
+
+            <!-- Connect Button -->
+            <div class="hidden md:block">
+                <a href="#contact" class="btn-ethereal px-5 py-2 text-sm font-medium text-white flex items-center gap-2">
+                    <div class="w-2 h-2 rounded-full bg-ethereal-saffron animate-pulse"></div>
+                    Initialize
+                </a>
+            </div>
+
+            <!-- Mobile Toggle -->
+            <button class="md:hidden text-gray-300 hover:text-white focus:outline-none p-2" id="mobile-menu-btn">
+                <i class="fa-solid fa-bars text-lg"></i>
+            </button>
+        </div>
+    </nav>
+    
+    <!-- Mobile Menu Overlay -->
+    <div id="mobile-menu" class="fixed inset-0 z-40 bg-surface-900/95 backdrop-blur-xl flex flex-col justify-center items-center space-y-8 opacity-0 pointer-events-none transition-opacity duration-300">
+        <a href="#philosophy" class="font-serif text-3xl text-white mobile-link">Philosophy</a>
+        <a href="#capabilities" class="font-serif text-3xl text-white mobile-link">Capabilities</a>
+        <a href="#resonance" class="font-serif text-3xl text-white mobile-link">Resonance</a>
+        <a href="#contact" class="btn-ethereal mt-4 px-8 py-3 text-lg font-medium text-white mobile-link">Initialize Connection</a>
+    </div>
+
+    <header class="relative min-h-screen flex items-center justify-center pt-20 px-6">
+        <div class="max-w-5xl mx-auto w-full text-center z-10 flex flex-col items-center">
+            
+            <div class="inline-flex items-center space-x-2 glass-panel px-4 py-1.5 rounded-full mb-8 animate-float">
+                <i class="fa-solid fa-circle-nodes text-ethereal-violet text-xs"></i>
+                <span class="font-mono text-xs text-gray-300 tracking-wider">TRIAD SYSTEM : SYNCHRONIZED</span>
+            </div>
+            
+            <!-- Highly elegant Serif heading (Opus style) -->
+            <h1 class="font-serif text-6xl md:text-8xl lg:text-[7rem] leading-[0.9] text-white mb-6">
+                Ethereal Code.<br/>
+                <span class="text-gradient-cool italic font-light">Harmonic Logic.</span>
+            </h1>
+            
+            <p class="font-sans text-lg md:text-xl text-gray-400 font-light max-w-2xl leading-relaxed mb-12">
+                We are Bhajan Mandali—a unified triad of software architects. We bridge high-performance enterprise engineering with the tranquil frequencies of Krishna bhajans, operating perfectly in sync.
+            </p>
+            
+            <div class="flex flex-wrap gap-4 justify-center">
+                <a href="#capabilities" class="glass-panel hover:bg-white hover:text-black transition-all duration-500 px-8 py-4 rounded-full font-sans text-sm font-medium flex items-center gap-2">
+                    Explore Capabilities
+                </a>
+                <a href="#resonance" class="btn-ethereal px-8 py-4 rounded-full font-sans text-sm font-medium flex items-center gap-2 text-white/80">
+                    <i class="fa-solid fa-wave-square text-ethereal-saffron"></i> Discover the Vibe
+                </a>
+            </div>
+        </div>
+        
+        <!-- Scroll indicator -->
+        <div class="absolute bottom-10 left-1/2 transform -translate-x-1/2 flex flex-col items-center opacity-50 animate-bounce">
+            <span class="font-mono text-[10px] tracking-widest mb-2 text-gray-400">SCROLL</span>
+            <div class="w-[1px] h-12 bg-gradient-to-b from-gray-400 to-transparent"></div>
+        </div>
+    </header>
+
+    <section id="philosophy" class="py-32 relative z-10">
+        <div class="max-w-6xl mx-auto px-6">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+                
+                <!-- Left: Textual Narrative -->
+                <div class="space-y-8">
+                    <h2 class="font-serif text-4xl md:text-6xl text-white leading-tight">
+                        A triad of minds,<br>
+                        <span class="text-gray-500 italic">one unified frequency.</span>
+                    </h2>
+                    
+                    <div class="space-y-6 font-sans text-gray-400 font-light text-lg leading-relaxed">
+                        <p>
+                            In the modern landscape of remote work, isolation is common. Bhajan Mandali rewrites this protocol. We are three independent professionals operating as a single, highly efficient unit.
+                        </p>
+                        <p>
+                            Our daily workflow exists entirely on a continuous, synchronized communication channel. But rather than filling the silence with corporate noise, our space is saturated with the spiritual resonance of Krishna devotional music.
+                        </p>
+                    </div>
+                    
+                    <div class="flex items-center space-x-6 pt-4">
+                        <div class="flex -space-x-4">
+                            <!-- Abstract representations of the 3 members -->
+                            <div class="w-12 h-12 rounded-full glass-panel flex items-center justify-center border-ethereal-cyan/30 z-30">
+                                <i class="fa-solid fa-terminal text-ethereal-cyan text-sm"></i>
+                            </div>
+                            <div class="w-12 h-12 rounded-full glass-panel flex items-center justify-center border-ethereal-violet/30 z-20">
+                                <i class="fa-solid fa-code text-ethereal-violet text-sm"></i>
+                            </div>
+                            <div class="w-12 h-12 rounded-full glass-panel flex items-center justify-center border-ethereal-saffron/30 z-10">
+                                <i class="fa-solid fa-database text-ethereal-saffron text-sm"></i>
+                            </div>
+                        </div>
+                        <span class="font-mono text-xs text-gray-500 tracking-wider">3 ACTIVE NODES</span>
+                    </div>
+                </div>
+
+                <!-- Right: Abstract Visual Element (Astra style orb) -->
+                <div class="relative h-[400px] w-full flex justify-center items-center">
+                    <div class="absolute w-64 h-64 bg-ethereal-violet/20 rounded-full blur-3xl animate-pulse-slow"></div>
+                    <div class="absolute w-48 h-48 bg-ethereal-saffron/20 rounded-full blur-2xl animate-blob" style="animation-delay: 2s;"></div>
+                    
+                    <div class="glass-panel p-8 rounded-[2rem] w-full max-w-md relative z-10 border border-white/10 backdrop-blur-3xl">
+                        <div class="flex justify-between items-center mb-6">
+                            <span class="font-mono text-xs text-ethereal-cyan">SYSTEM.LOG</span>
+                            <span class="w-2 h-2 rounded-full bg-green-400 animate-pulse"></span>
+                        </div>
+                        <div class="space-y-4 font-mono text-sm text-gray-300">
+                            <div class="opacity-50">> Initializing workspace...</div>
+                            <div class="opacity-70">> Connecting peers: [1, 2, 3]</div>
+                            <div class="text-ethereal-violet">> Syncing logic state... OK</div>
+                            <div class="text-ethereal-saffron">> Starting audio stream: Govind_Hare.flac</div>
+                            <div class="text-white pt-2 border-t border-white/10 mt-4">
+                                STATUS: Optimal Flow State Achieved.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+    </section>
+
+    <section id="capabilities" class="py-32 relative z-10">
+        <div class="max-w-7xl mx-auto px-6">
+            
+            <div class="text-center mb-20 space-y-4">
+                <span class="font-mono text-xs text-ethereal-violet tracking-widest uppercase">Expertise</span>
+                <h2 class="font-serif text-5xl md:text-6xl text-white">Technical Architecture</h2>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                
+                <!-- Card 1 -->
+                <div class="glass-panel p-10 rounded-[2rem] group hover:-translate-y-2 transition-transform duration-500">
+                    <div class="w-14 h-14 rounded-full bg-white/5 border border-white/10 flex items-center justify-center mb-8 group-hover:bg-blue-500/20 group-hover:border-blue-500/30 transition-colors">
+                        <i class="fa-brands fa-salesforce text-2xl text-blue-400"></i>
+                    </div>
+                    <h3 class="font-serif text-2xl text-white mb-4">Salesforce Ecosystems</h3>
+                    <p class="font-sans font-light text-gray-400 leading-relaxed mb-8 text-sm">
+                        Deep architectural knowledge of Salesforce CRM. We engineer complex Apex logic, responsive Lightning Web Components (LWC), and seamless enterprise integrations.
+                    </p>
+                    <div class="flex flex-wrap gap-2">
+                        <span class="px-3 py-1 rounded-full border border-white/10 text-xs font-mono text-gray-400">Apex</span>
+                        <span class="px-3 py-1 rounded-full border border-white/10 text-xs font-mono text-gray-400">LWC</span>
+                        <span class="px-3 py-1 rounded-full border border-white/10 text-xs font-mono text-gray-400">API</span>
+                    </div>
+                </div>
+
+                <!-- Card 2 -->
+                <div class="glass-panel p-10 rounded-[2rem] group hover:-translate-y-2 transition-transform duration-500">
+                    <div class="w-14 h-14 rounded-full bg-white/5 border border-white/10 flex items-center justify-center mb-8 group-hover:bg-ethereal-cyan/20 group-hover:border-ethereal-cyan/30 transition-colors">
+                        <i class="fa-solid fa-server text-2xl text-ethereal-cyan"></i>
+                    </div>
+                    <h3 class="font-serif text-2xl text-white mb-4">Enterprise Applications</h3>
+                    <p class="font-sans font-light text-gray-400 leading-relaxed mb-8 text-sm">
+                        Bespoke in-house solutions tailored to unique organizational needs. We build robust, secure, and highly scalable internal tools and dashboards.
+                    </p>
+                    <div class="flex flex-wrap gap-2">
+                        <span class="px-3 py-1 rounded-full border border-white/10 text-xs font-mono text-gray-400">Node.js</span>
+                        <span class="px-3 py-1 rounded-full border border-white/10 text-xs font-mono text-gray-400">React</span>
+                        <span class="px-3 py-1 rounded-full border border-white/10 text-xs font-mono text-gray-400">SQL/NoSQL</span>
+                    </div>
+                </div>
+
+                <!-- Card 3 -->
+                <div class="glass-panel p-10 rounded-[2rem] group hover:-translate-y-2 transition-transform duration-500">
+                    <div class="w-14 h-14 rounded-full bg-white/5 border border-white/10 flex items-center justify-center mb-8 group-hover:bg-ethereal-violet/20 group-hover:border-ethereal-violet/30 transition-colors">
+                        <i class="fa-solid fa-layer-group text-2xl text-ethereal-violet"></i>
+                    </div>
+                    <h3 class="font-serif text-2xl text-white mb-4">Full-Stack Solutions</h3>
+                    <p class="font-sans font-light text-gray-400 leading-relaxed mb-8 text-sm">
+                        End-to-end development bridging beautiful user interfaces with high-performance backend microservices. Agile, adaptable, and forward-thinking.
+                    </p>
+                    <div class="flex flex-wrap gap-2">
+                        <span class="px-3 py-1 rounded-full border border-white/10 text-xs font-mono text-gray-400">UI/UX</span>
+                        <span class="px-3 py-1 rounded-full border border-white/10 text-xs font-mono text-gray-400">Cloud</span>
+                        <span class="px-3 py-1 rounded-full border border-white/10 text-xs font-mono text-gray-400">DevOps</span>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <section id="resonance" class="py-32 relative z-10 overflow-hidden">
+        <div class="max-w-6xl mx-auto px-6 relative">
+            
+            <div class="glass-panel p-10 md:p-16 rounded-[3rem] border border-ethereal-saffron/20 relative overflow-hidden">
+                <!-- Background ambient glow inside the card -->
+                <div class="absolute inset-0 bg-gradient-to-br from-ethereal-saffron/10 to-transparent"></div>
+                
+                <div class="relative z-10 grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+                    
+                    <div>
+                        <span class="font-mono text-xs text-ethereal-saffron tracking-widest uppercase mb-4 block">The Vibe</span>
+                        <h2 class="font-serif text-4xl md:text-5xl text-white mb-6">Spiritual Resonance in the Digital Age.</h2>
+                        <p class="font-sans font-light text-gray-300 text-lg leading-relaxed mb-6">
+                            Code compiles in milliseconds, but human focus requires sustainable energy. We find our equilibrium in devotion.
+                        </p>
+                        <p class="font-sans font-light text-gray-400 text-base leading-relaxed mb-8">
+                            While we architect complex systems, the background of our shared call is filled with the timeless chants and bhajans of Lord Krishna. This creates a serene, anxiety-free atmosphere, allowing for deep work, profound collaboration, and a sense of joy in our daily tasks.
+                        </p>
+                        
+                        <div class="inline-flex items-center space-x-3 px-5 py-3 rounded-full bg-white/5 border border-white/10">
+                            <i class="fa-solid fa-music text-ethereal-saffron"></i>
+                            <span class="font-mono text-xs text-gray-300">Currently Playing: Hare Krishna Mahamantra</span>
+                        </div>
+                    </div>
+
+                    <!-- Abstract Audio Visualizer (CSS driven) -->
+                    <div class="flex justify-center items-center h-48 md:h-full">
+                        <div class="flex items-end justify-center space-x-2 h-32 w-full max-w-xs">
+                            <!-- Bars representing audio frequencies -->
+                            <div class="w-3 bg-gradient-to-t from-ethereal-saffron/20 to-ethereal-saffron rounded-full animate-[pulse_1s_ease-in-out_infinite]" style="height: 40%;"></div>
+                            <div class="w-3 bg-gradient-to-t from-ethereal-saffron/20 to-ethereal-saffron rounded-full animate-[pulse_1.5s_ease-in-out_infinite]" style="height: 70%;"></div>
+                            <div class="w-3 bg-gradient-to-t from-ethereal-saffron/20 to-ethereal-saffron rounded-full animate-[pulse_0.8s_ease-in-out_infinite]" style="height: 100%;"></div>
+                            <div class="w-3 bg-gradient-to-t from-ethereal-saffron/20 to-ethereal-saffron rounded-full animate-[pulse_1.2s_ease-in-out_infinite]" style="height: 50%;"></div>
+                            <div class="w-3 bg-gradient-to-t from-ethereal-saffron/20 to-ethereal-saffron rounded-full animate-[pulse_0.9s_ease-in-out_infinite]" style="height: 80%;"></div>
+                            <div class="w-3 bg-gradient-to-t from-ethereal-saffron/20 to-ethereal-saffron rounded-full animate-[pulse_1.4s_ease-in-out_infinite]" style="height: 60%;"></div>
+                            <div class="w-3 bg-gradient-to-t from-ethereal-saffron/20 to-ethereal-saffron rounded-full animate-[pulse_1.1s_ease-in-out_infinite]" style="height: 90%;"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <footer id="contact" class="relative z-10 pt-20 pb-10 border-t border-white/5 bg-surface-900/50 backdrop-blur-lg">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-12 mb-16">
+                
+                <div>
+                    <h2 class="font-serif text-3xl text-white mb-4">Let's harmonize your systems.</h2>
+                    <p class="font-sans font-light text-gray-400 max-w-sm mb-8 text-sm">
+                        Whether you need a complex Salesforce architecture or a custom enterprise application, our triad is ready to connect.
+                    </p>
+                    <a href="mailto:hello@bhajanmandali.example.com" class="inline-flex items-center text-ethereal-cyan hover:text-white transition-colors font-mono text-sm border-b border-ethereal-cyan/30 hover:border-white pb-1 pb-1 gap-2">
+                        hello@bhajanmandali.example.com <i class="fa-solid fa-arrow-right -rotate-45"></i>
+                    </a>
+                </div>
+                
+                <div class="md:text-right flex flex-col md:items-end justify-between">
+                    <div class="glass-panel p-6 rounded-2xl inline-block text-left mb-8 md:mb-0">
+                        <div class="font-mono text-xs text-gray-500 mb-4 uppercase tracking-widest">System Status</div>
+                        <div class="flex items-center space-x-3 mb-2">
+                            <span class="w-2 h-2 rounded-full bg-green-400"></span>
+                            <span class="font-sans text-sm text-gray-300">Nodes Online (3/3)</span>
+                        </div>
+                        <div class="flex items-center space-x-3">
+                            <span class="w-2 h-2 rounded-full bg-ethereal-saffron"></span>
+                            <span class="font-sans text-sm text-gray-300">Audio Uplink Stable</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="flex flex-col md:flex-row justify-between items-center border-t border-white/5 pt-8">
+                <div class="flex items-center space-x-2 mb-4 md:mb-0">
+                    <i class="fa-solid fa-fan text-ethereal-saffron text-sm"></i>
+                    <span class="font-serif text-lg text-white tracking-wide">Bhajan Mandali</span>
+                </div>
+                
+                <p class="font-mono text-[10px] text-gray-500 uppercase tracking-widest text-center md:text-right">
+                    &copy; <span id="year"></span> Bhajan Mandali. Engineered with devotion.<br>
+                    All systems operational.
+                </p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Set dynamic year
+        document.getElementById('year').textContent = new Date().getFullYear();
+
+        // Elegant Mobile Menu Toggle
+        const btn = document.getElementById('mobile-menu-btn');
+        const menu = document.getElementById('mobile-menu');
+        const icon = btn.querySelector('i');
+        let isMenuOpen = false;
+
+        function toggleMenu() {
+            isMenuOpen = !isMenuOpen;
+            if(isMenuOpen) {
+                menu.classList.remove('opacity-0', 'pointer-events-none');
+                menu.classList.add('opacity-100', 'pointer-events-auto');
+                icon.className = 'fa-solid fa-xmark text-lg text-white';
+                document.body.style.overflow = 'hidden'; // Prevent scrolling
+            } else {
+                menu.classList.add('opacity-0', 'pointer-events-none');
+                menu.classList.remove('opacity-100', 'pointer-events-auto');
+                icon.className = 'fa-solid fa-bars text-lg text-gray-300';
+                document.body.style.overflow = '';
+            }
+        }
+
+        btn.addEventListener('click', toggleMenu);
+
+        // Close mobile menu on link click
+        menu.querySelectorAll('.mobile-link').forEach(link => {
+            link.addEventListener('click', toggleMenu);
+        });
+
+        // Add subtle parallax to the mesh background on mousemove
+        document.addEventListener('mousemove', (e) => {
+            const blobs = document.querySelectorAll('.mesh-blob');
+            const x = e.clientX / window.innerWidth;
+            const y = e.clientY / window.innerHeight;
+            
+            blobs[0].style.transform = `translate(${x * 30}px, ${y * 30}px)`;
+            blobs[1].style.transform = `translate(${x * -40}px, ${y * -40}px)`;
+            blobs[2].style.transform = `translate(${x * 20}px, ${y * -20}px)`;
+        });
+    </script>
+</body>
+</html>
